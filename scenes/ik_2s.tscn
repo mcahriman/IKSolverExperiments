@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ptn5s3utu2jy"]
+[gd_scene load_steps=5 format=3 uid="uid://ptn5s3utu2jy"]
 
 [ext_resource type="Script" path="res://scenes/line_drawer.gd" id="1_melp6"]
 [ext_resource type="Texture2D" uid="uid://baf2mrji367id" path="res://icons/target.png" id="2_8yahe"]
 [ext_resource type="Script" path="res://scenes/TargetPlacer.gd" id="2_lnfhg"]
+[ext_resource type="Texture2D" uid="uid://deb6b3f4kkyid" path="res://sprites/Crow.png" id="4_dkmpn"]
 
 [node name="ik_2s" type="Node2D"]
 
@@ -69,6 +70,14 @@ visible = false
 texture = ExtResource("2_8yahe")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
+
+[node name="SimpleFollower" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SimpleFollower"]
+texture = ExtResource("4_dkmpn")
+hframes = 4
+vframes = 4
+frame = 3
 
 [connection signal="toggled" from="LineDrawer/GridContainer/control_draw_lines" to="LineDrawer" method="_on_control_draw_lines_toggled"]
 [connection signal="toggled" from="LineDrawer/GridContainer/control_toggle_guides" to="LineDrawer" method="_on_control_toggle_guides_toggled"]
