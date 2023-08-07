@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://ptn5s3utu2jy"]
+
+[ext_resource type="Script" path="res://scenes/line_drawer.gd" id="1_melp6"]
+[ext_resource type="Texture2D" uid="uid://baf2mrji367id" path="res://icons/target.png" id="2_8yahe"]
+[ext_resource type="Script" path="res://scenes/TargetPlacer.gd" id="2_lnfhg"]
+
+[node name="ik_2s" type="Node2D"]
+
+[node name="LineDrawer" type="Node2D" parent="."]
+script = ExtResource("1_melp6")
+
+[node name="ControlsArea" type="ReferenceRect" parent="LineDrawer"]
+offset_left = 941.0
+offset_top = 13.0
+offset_right = 1101.0
+offset_bottom = 156.0
+
+[node name="GridContainer" type="GridContainer" parent="LineDrawer"]
+offset_left = 948.0
+offset_top = 16.0
+offset_right = 1093.0
+offset_bottom = 151.0
+
+[node name="control_draw_lines" type="CheckButton" parent="LineDrawer/GridContainer"]
+layout_mode = 2
+text = "Draw lines"
+flat = true
+
+[node name="control_toggle_guides" type="CheckButton" parent="LineDrawer/GridContainer"]
+layout_mode = 2
+text = "Show guides"
+flat = true
+
+[node name="HSeparator" type="HSeparator" parent="LineDrawer/GridContainer"]
+layout_mode = 2
+
+[node name="LineDrawerResetButton" type="Button" parent="LineDrawer/GridContainer"]
+layout_mode = 2
+text = "Reset lines"
+
+[node name="TargetPlacer" type="Node2D" parent="."]
+script = ExtResource("2_lnfhg")
+
+[node name="GridContainer" type="GridContainer" parent="TargetPlacer"]
+offset_left = 953.0
+offset_top = 193.0
+offset_right = 1094.0
+offset_bottom = 377.0
+
+[node name="PlaceTargetButton" type="Button" parent="TargetPlacer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Set target"
+
+[node name="HSeparator" type="HSeparator" parent="TargetPlacer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="XCoordDisplay" type="LineEdit" parent="TargetPlacer/GridContainer"]
+layout_mode = 2
+editable = false
+
+[node name="YCoordDisplay" type="LineEdit" parent="TargetPlacer/GridContainer"]
+layout_mode = 2
+editable = false
+
+[node name="TargetIndicator" type="Sprite2D" parent="TargetPlacer"]
+visible = false
+texture = ExtResource("2_8yahe")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[connection signal="toggled" from="LineDrawer/GridContainer/control_draw_lines" to="LineDrawer" method="_on_control_draw_lines_toggled"]
+[connection signal="toggled" from="LineDrawer/GridContainer/control_toggle_guides" to="LineDrawer" method="_on_control_toggle_guides_toggled"]
+[connection signal="pressed" from="LineDrawer/GridContainer/LineDrawerResetButton" to="LineDrawer" method="_on_line_drawer_reset_button_pressed"]
+[connection signal="pressed" from="TargetPlacer/GridContainer/PlaceTargetButton" to="TargetPlacer" method="_on_place_target_button_pressed"]
