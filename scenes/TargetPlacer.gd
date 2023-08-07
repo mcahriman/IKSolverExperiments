@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var targetLocation = Vector2(0,0)
+
 var arrow = load("res://icons/arrow.png")
 var is_setting_target = false
 # Called when the node enters the scene tree for the first time.
@@ -22,10 +24,11 @@ func _on_place_target_button_pressed():
 func _input(event):
 	if is_setting_target and event is InputEventMouseButton:
 		is_setting_target = false
-		$TargetIndicator.position = event.position
+		targetLocation = event.position
+		$TargetIndicator.position = targetLocation
 		$TargetIndicator.show()
 		print("target set")
-		$GridContainer/XCoordDisplay.text = str(event.position.x)
-		$GridContainer/YCoordDisplay.text = str(event.position.y)
+		$GridContainer/XCoordDisplay.text = str(targetLocation.x)
+		$GridContainer/YCoordDisplay.text = str(targetLocation.y)
 		# set default cursor
 		Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
